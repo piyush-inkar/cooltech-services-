@@ -23,6 +23,8 @@ import { ProductCard } from './components/ProductCard';
 import { ServiceCard } from './components/ServiceCard';
 import { ReviewCard } from './components/ReviewCard';
 import { Footer } from './components/Footer';
+import MaintenanceList from './components/List/MaintenanceList';
+import ReviewsList from './components/List/ReviewList';
 
 export default function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -183,7 +185,7 @@ export default function App() {
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-sky-900/90 to-blue-900/80"></div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -199,7 +201,7 @@ export default function App() {
             <Snowflake className="w-5 h-5 text-cyan-300" />
             <span className="text-white text-sm">Stay Cool All Summer</span>
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -211,7 +213,7 @@ export default function App() {
               COOLTECH SERVICES
             </span>
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -220,7 +222,7 @@ export default function App() {
           >
             Brand New ACs | Refurbished ACs | Expert Maintenance & Services
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -262,28 +264,26 @@ export default function App() {
                 <button
                   key={brand}
                   onClick={() => setBrandFilter(brand)}
-                  className={`px-3 py-1 rounded-md transition-all text-sm ${
-                    brandFilter === brand
-                      ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                  className={`px-3 py-1 rounded-md transition-all text-sm ${brandFilter === brand
+                    ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
                 >
                   {brand}
                 </button>
               ))}
             </div>
-            
+
             <div className="flex flex-wrap gap-2 items-center bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm">
               <span className="text-gray-600 text-sm">Capacity:</span>
               {capacities.map((capacity) => (
                 <button
                   key={capacity}
                   onClick={() => setCapacityFilter(capacity)}
-                  className={`px-3 py-1 rounded-md transition-all text-sm ${
-                    capacityFilter === capacity
-                      ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                  className={`px-3 py-1 rounded-md transition-all text-sm ${capacityFilter === capacity
+                    ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
                 >
                   {capacity}
                 </button>
@@ -338,28 +338,26 @@ export default function App() {
                 <button
                   key={brand}
                   onClick={() => setBrandFilter(brand)}
-                  className={`px-3 py-1 rounded-md transition-all text-sm ${
-                    brandFilter === brand
-                      ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                  className={`px-3 py-1 rounded-md transition-all text-sm ${brandFilter === brand
+                    ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
                 >
                   {brand}
                 </button>
               ))}
             </div>
-            
+
             <div className="flex flex-wrap gap-2 items-center bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm">
               <span className="text-gray-600 text-sm">Capacity:</span>
               {capacities.map((capacity) => (
                 <button
                   key={capacity}
                   onClick={() => setCapacityFilter(capacity)}
-                  className={`px-3 py-1 rounded-md transition-all text-sm ${
-                    capacityFilter === capacity
-                      ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                  className={`px-3 py-1 rounded-md transition-all text-sm ${capacityFilter === capacity
+                    ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
                 >
                   {capacity}
                 </button>
@@ -406,26 +404,11 @@ export default function App() {
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {services.map((service, index) => (
-              <motion.div
-                key={service.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <ServiceCard {...service} />
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Render MaintenanceList directly, no extra grid */}
+          <MaintenanceList />
         </div>
       </section>
+
 
       {/* Reviews Section */}
       <section id="reviews" className="py-20 bg-gradient-to-br from-sky-50 to-blue-50">
@@ -439,16 +422,19 @@ export default function App() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
               Customer Reviews
             </h2>
-            <p className="text-gray-600">What our satisfied customers say about us</p>
+
+            <p className="text-gray-600">
+              What our satisfied customers say about us
+            </p>
           </motion.div>
 
           <Slider {...sliderSettings}>
-            {reviews.map((review) => (
-              <ReviewCard key={review.name} {...review} />
-            ))}
+            <ReviewsList />   {/* 👈 EACH ReviewCard becomes a slide */}
           </Slider>
         </div>
       </section>
+
+
 
       {/* About Us Section */}
       <section id="about-us" className="py-20 bg-white">
